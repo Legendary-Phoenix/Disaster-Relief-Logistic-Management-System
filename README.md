@@ -11,7 +11,7 @@ The system is entirely written in **C++** using **core language features**, with
 - Priority Queue
 - Circular Queue
 
-## The program is designed to be **menu-driven** and **user-friendly**, with the development of custom data structures **without the use of STL structures such** as **<list>** or **<vector>**
+The program is designed to be **menu-driven** and **user-friendly**, and it uses custom data structures **without relying on STL containers** such as `list`, `vector`, or `queue`.
 
 ## 🌍 Scenario Background
 
@@ -74,4 +74,4 @@ The system is developed collaboratively by us, a group of 4 students. We work on
 
 ## 📄 Note
 
-This project is developed for academic purposes as part of the coursework for the Data Structures and Algorithm coursework and is intended to demonstrate data structure application in a real-world scenario.
+This project is developed for academic purposes as part of the coursework for the Data Structures and Algorithm module and is intended to demonstrate data structure application in a real-world scenario.
