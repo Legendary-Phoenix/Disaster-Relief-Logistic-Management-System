@@ -1,28 +1,29 @@
 #pragma once
 
+#include <iostream>
 #include "Volunteer.h"
 
 class VolunteerQueue
 {
 private:
-    Volunteer *arr;
-    int capacity;
+    Volunteer *queue;
     int front;
     int rear;
+    int capacity;
+    int count;
 
     void resize()
     {
         int newCapacity = capacity * 2;
-        Volunteer *newArr = new Volunteer[newCapacity];
-        int size = rear - front + 1;
-        for (int i = 0; i < size; i++)
+        Volunteer *newQueue = new Volunteer[newCapacity];
+        for (int i = 0; i < count; ++i)
         {
-            newArr[i] = arr[front + i];
+            newQueue[i] = queue[front + i];
         }
-        delete[] arr;
-        arr = newArr;
+        delete[] queue;
+        queue = newQueue;
         front = 0;
-        rear = size - 1;
+        rear = count - 1;
         capacity = newCapacity;
     }
 
@@ -30,14 +31,15 @@ public:
     VolunteerQueue()
     {
         capacity = 10;
-        arr = new Volunteer[capacity];
+        queue = new Volunteer[capacity];
         front = 0;
         rear = -1;
+        count = 0;
     }
 
     ~VolunteerQueue()
     {
-        delete[] arr;
+        delete[] queue;
     }
 
     void enqueue(Volunteer v)
@@ -46,30 +48,54 @@ public:
         {
             resize();
         }
-        arr[++rear] = v;
+        rear++;
+        queue[rear] = v;
+        count++;
     }
 
     Volunteer dequeue()
     {
         if (isEmpty())
         {
-            throw out_of_range("Queue is empty");
+            throw runtime_error("Queue is empty. Cannot dequeue.");
         }
-        return arr[front++];
+        Volunteer temp = queue[front];
+        front++;
+        count--;
+        return temp;
+    }
+
+    Volunteer peek() const
+    {
+        if (isEmpty())
+        {
+            throw runtime_error("Queue is empty. Cannot peek.");
+        }
+        return queue[front];
     }
 
     bool isEmpty() const
     {
-        return front > rear;
+        return count == 0;
     }
 
     int size() const
     {
-        return rear - front + 1;
+        return count;
     }
 
-    Volunteer *getAll() const
+    void display() const
     {
-        return arr + front;
+        if (isEmpty())
+        {
+            cout << "Queue is empty." << endl;
+            return;
+        }
+        cout << "Volunteers in Queue:" << endl;
+        for (int i = 0; i < count; ++i)
+        {
+            queue[front + i].display();
+            cout << "----------------------" << endl;
+        }
     }
 };

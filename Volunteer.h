@@ -1,31 +1,36 @@
 #pragma once
 
-#include <iostream>
 #include <string>
+#include <iostream>
 using namespace std;
 
 class Volunteer
 {
-public:
+private:
     string id;
     string name;
-    int age;
+    string contact;
     string type;
 
+public:
     Volunteer() {}
 
-    Volunteer(string id, string name, int age, string type)
-    {
-        this->id = id;
-        this->name = name;
-        this->age = age;
-        this->type = type;
-    }
+    Volunteer(string id, string name, string contact, string skill)
+        : id(id), name(name), contact(contact), type(type) {}
+
+    // string getId() const { return id; }
+    // string getName() const { return name; }
+    // string getContact() const { return contact; }
+    // string getSkill() const { return skill; }
+
+    // void setId(string id) { this->id = id; }
+    // void setName(string name) { this->name = name; }
+    // void setContact(string contact) { this->contact = contact; }
+    // void setSkill(string skill) { this->skill = skill; }
 
     void display() const
     {
-        cout << "ID: " << id << ", Name: " << name << ", Age: " << age << ", Type: " << type << endl;
+        cout << "ID: " << id << "\nName: " << name
+             << "\nContact: " << contact << "\nType: " << type << endl;
     }
-
-    int Volunteer::nextID = 1;
 };
