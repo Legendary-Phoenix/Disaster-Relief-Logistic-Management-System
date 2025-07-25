@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <fstream>
 #include <string>
 using namespace std;
 
@@ -138,5 +139,43 @@ public:
     int getTypeCount() const
     {
         return count;
+    }
+
+    void saveToCSV(const string &filename)
+    {
+        cout << "Updating volunteer data in file...\n";
+        ofstream file(filename);
+        if (!file.is_open())
+        {
+            cout << "Error opening file for writing: " << filename << endl;
+            return;
+        }
+
+        // Write CSV header
+        file << "id,name,contact,type\n";
+
+        // Loop through all volunteer queues
+        for (int i = 0; i < count; ++i)
+        {
+            VolunteerQueue &queue = queues[i];
+            int count = queue.getSize();
+
+            for (int j = 0; j < count; ++j)
+            {
+                try
+                {
+                    Volunteer &v = queue.getVolunteerAt(j);
+                    file << v.getId() << "," << v.getName() << "," << v.getContact() << ","
+                         << types[i] << "\n";
+                }
+                catch (const std::out_of_range &e)
+                {
+                    cout << "Error accessing volunteer: " << e.what() << endl;
+                }
+            }
+        }
+
+        file.close();
+        cout << "Data in file succesfully updated." << endl;
     }
 };

@@ -37,11 +37,6 @@ public:
         count = 0;
     }
 
-    ~VolunteerQueue()
-    {
-        delete[] queue;
-    }
-
     void enqueue(Volunteer v)
     {
         if (rear + 1 == capacity)
@@ -79,7 +74,7 @@ public:
         return count == 0;
     }
 
-    int size() const
+    int getSize() const
     {
         return count;
     }
@@ -97,5 +92,34 @@ public:
             queue[front + i].display();
             cout << "----------------------" << endl;
         }
+    }
+
+    // subject to change
+    Volunteer &getVolunteerAt(int index)
+    {
+        if (index < 0 || index >= count)
+            throw out_of_range("Invalid index");
+
+        return queue[front + index];
+    }
+
+    // Copy constructor
+    VolunteerQueue(const VolunteerQueue &other)
+    {
+        capacity = other.capacity;
+        count = other.count;
+        front = 0;
+        rear = count - 1;
+
+        queue = new Volunteer[capacity];
+        for (int i = 0; i < count; ++i)
+        {
+            queue[i] = other.queue[other.front + i];
+        }
+    }
+
+    ~VolunteerQueue()
+    {
+        delete[] queue;
     }
 };
