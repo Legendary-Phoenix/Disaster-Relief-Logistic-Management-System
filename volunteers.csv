@@ -1,8 +1,8 @@
 id,name,contact,type
-V0001,Alice Tan,012-3456789,Medical,
+V0001,Alice Tan,012-3456789,Medical
 V0003,Charlie Ong,013-2244668,Medical
-V015,gg,0154325436,Medical,
-V0002,astyr,011-9876543,Logistics,
+V015,gg,0154325436,Medical
+V020,Petrovski Mathew,0154325421,Medical
 V005,Edward Chia,010-5566778,Logistics
 V010,Julia Chan,018-9988776,Logistics
 V004,Diana Lim,017-8899000,Food Supply
@@ -10,4 +10,4 @@ V008,Hana Yusof,019-3344556,Food Supply
 V017,Lim Tek,36474834,Food Supply
 V009,Ivan Teh,014-6677889,Rescue
 V016,boi,98642489,Rescue
-V011,Maxwell Goh,016-245-6782,Trauma Response
+V019,david,0152637211,Trauma Response

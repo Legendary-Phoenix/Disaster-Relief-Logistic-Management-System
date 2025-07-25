@@ -109,7 +109,7 @@ public:
             cout << "Volunteer type not found." << endl;
             return;
         }
-        cout << "Volunteers of type: " << typeName << endl;
+        cout << "\n\n---Volunteer Type: " << typeName << "---" << endl;
         queues[idx].display();
     }
 
@@ -120,7 +120,7 @@ public:
             cout << "No volunteer types available." << endl;
             return;
         }
-        cout << "Available volunteer types:" << endl;
+        cout << "\nAvailable volunteer types:" << endl;
         for (int i = 0; i < count; ++i)
         {
             cout << i + 1 << ". " << types[i] << endl;

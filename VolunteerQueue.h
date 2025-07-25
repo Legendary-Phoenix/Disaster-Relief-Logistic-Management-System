@@ -83,7 +83,7 @@ public:
     {
         if (isEmpty())
         {
-            cout << "Queue is empty." << endl;
+            cout << "There are currently no volunteers for this type." << endl;
             return;
         }
         cout << "Volunteers in Queue:" << endl;
@@ -116,6 +116,28 @@ public:
         {
             queue[i] = other.queue[other.front + i];
         }
+    }
+
+    // Assignment operator
+    VolunteerQueue &operator=(const VolunteerQueue &other)
+    {
+        if (this != &other)
+        {
+
+            delete[] queue;
+
+            capacity = other.capacity;
+            count = other.count;
+            front = 0;
+            rear = count - 1;
+
+            queue = new Volunteer[capacity];
+            for (int i = 0; i < count; ++i)
+            {
+                queue[i] = other.queue[other.front + i];
+            }
+        }
+        return *this;
     }
 
     ~VolunteerQueue()

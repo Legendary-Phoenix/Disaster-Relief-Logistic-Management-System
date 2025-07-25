@@ -74,10 +74,11 @@ string promptVolunteerType(VolunteerQueueArray &vqa)
 
     if (choice == vqa.getTypeCount() + 1)
     {
-        cout << "Enter new volunteer type name: ";
+        cout << "\nEnter new volunteer type name: ";
         string newType;
         getline(cin, newType);
         vqa.addType(newType);
+        cout << "\nNew volunteer type successfully added.";
         return newType;
     }
     else if (choice >= 1 && choice <= vqa.getTypeCount())
@@ -112,18 +113,18 @@ void volunteerMenu(VolunteerQueueArray &vqa)
             // Register
             string name, contact, skill;
 
-            cout << "Enter name: ";
+            cout << "\nEnter name: ";
             getline(cin, name);
             cout << "Enter contact: ";
             getline(cin, contact);
-
+            cout << "\n--Assign volunteer to type--";
             string type = promptVolunteerType(vqa);
             string id = generateVolunteerID();
 
             Volunteer v(id, name, contact, type);
             vqa.enqueue(type, v);
 
-            cout << "Volunteer registered successfully.\n";
+            cout << "\nVolunteer registered successfully.\n";
             vqa.saveToCSV("volunteers.csv");
         }
         else if (choice == 2)
@@ -134,14 +135,15 @@ void volunteerMenu(VolunteerQueueArray &vqa)
                 cout << "No volunteer types available.\n";
                 continue;
             }
-
+            cout << "\n--Choose volunteer type to deploy--";
             string type = promptVolunteerType(vqa);
             try
             {
                 Volunteer deployed = vqa.dequeue(type);
-                cout << "Volunteer deployed to relief site.\n";
+                cout << "\nVolunteer deployed to relief site.\n";
                 cout << "\nDeployed volunteer:\n";
                 deployed.display();
+                cout << "\n";
             }
             catch (const exception &e)
             {
