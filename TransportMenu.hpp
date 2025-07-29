@@ -14,6 +14,9 @@ public:
     TransportMenu(int size = 10) : scheduler(size) {}
 
     void showMenu() {
+
+        scheduler.loadFromCSV("transports.csv");
+
         int choice;
         do {
             cout << "\n=== Transport Unit Scheduler Menu ===\n";
@@ -21,6 +24,8 @@ public:
             cout << "2. Rotate Vehicle Shift\n";
             cout << "3. Display Vehicle Schedule\n";
             cout << "4. Deploy Front Vehicle\n";
+            cout << "5. Save to CSV\n";
+            cout << "6. Load from CSV\n";
             cout << "0. Exit\n";
             cout << "Enter choice: ";
             cin >> choice;
@@ -38,6 +43,12 @@ public:
                     break;
                 case 4:
                     deployVehicle();
+                    break;
+                case 5:
+                    scheduler.saveToCSV("transports.csv");
+                    break;
+                case 6:
+                    scheduler.loadFromCSV("transports.csv");
                     break;
                 case 0:
                     cout << "Exiting...\n";

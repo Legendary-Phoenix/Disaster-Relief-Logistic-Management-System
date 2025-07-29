@@ -1,7 +1,11 @@
 #pragma once
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include "TransportUnit.hpp"
 #include "Array.hpp"
+
+using namespace std;
 
 class TransportUnitScheduler {
 
@@ -18,24 +22,23 @@ public:
 
     void addVehicle(TransportUnit* unit) {
         if (count == capacity) {
-            std::cout << "Schedule is full. Cannot add more transport units.\n";
+            cout << "Schedule is full. Cannot add more transport units.\n";
             return;
         }
 
-        // Insert into correct rear position
         rear = (rear + 1) % capacity;
         if (units.size() < capacity)
-            units.insert(rear, unit);  // fill empty slots initially
+            units.insert(rear, unit);
         else
-            units[rear] = unit;        // overwrite slot
+            units[rear] = unit;
 
         count++;
-        std::cout << unit->getId() << " added to schedule.\n";
+        cout << unit->getId() << " added to schedule.\n";
     }
 
     void rotateVehicleShift() {
         if (count == 0) {
-            std::cout << "No transport units to rotate.\n";
+            cout << "No transport units to rotate.\n";
             return;
         }
 
@@ -43,25 +46,66 @@ public:
         units[rear] = units[front];
         front = (front + 1) % capacity;
 
-        std::cout << "Rotated shift. " << units[rear]->getId() << " moved to rear.\n";
+        cout << "Rotated shift. " << units[rear]->getId() << " moved to rear.\n";
     }
 
     void displaySchedule() const {
         if (count == 0) {
-            std::cout << "No transport units in schedule.\n";
+            cout << "No transport units in schedule.\n";
             return;
         }
 
-        std::cout << "Current Transport Unit Schedule:\n";
+        cout << "Current Transport Unit Schedule:\n";
         for (int i = 0; i < count; ++i) {
             int index = (front + i) % capacity;
-            std::cout << "- " << units[index]->getId() << "\n";
+            cout << "- " << units.get(index)->getId() << "\n";
         }
     }
 
     TransportUnit* getFrontUnit() const {
         if (count == 0) return nullptr;
-        return units[front];
+        return units.get(front);
     }
 
+    void saveToCSV(const string& filename) const {
+        ofstream outFile(filename);
+        if (!outFile) {
+            cerr << "Failed to open file for writing.\n";
+            return;
+        }
+
+        for (int i = 0; i < count; ++i) {
+            int index = (front + i) % capacity;
+            TransportUnit* unit = units.get(index);
+            outFile << unit->getId() << "," << unit->getType() << "," << unit->getUsage() << "\n";
+        }
+
+        outFile.close();
+        cout << "Schedule saved to " << filename << "\n";
+    }
+
+    void loadFromCSV(const string& filename) {
+        ifstream inFile(filename);
+        if (!inFile) {
+            cerr << "Failed to open file for reading.\n";
+            return;
+        }
+
+        string line;
+        while (getline(inFile, line)) {
+            stringstream ss(line);
+            string id, type, usageStr;
+
+            if (getline(ss, id, ',') &&
+                getline(ss, type, ',') &&
+                getline(ss, usageStr)) {
+                int usage = stoi(usageStr);
+                TransportUnit* unit = new TransportUnit(id, type, usage);
+                addVehicle(unit);
+            }
+        }
+
+        inFile.close();
+        cout << "Schedule loaded from " << filename << "\n";
+    }
 };

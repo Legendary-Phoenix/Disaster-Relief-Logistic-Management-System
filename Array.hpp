@@ -53,7 +53,7 @@ public:
     T& operator[](int index) {
         return data[index];
     }
-    
+
     const T& operator[](int index) const {
     return data[index];
 }
@@ -66,6 +66,21 @@ public:
     bool isEmpty() const {
         return length == 0;
     }
+
+   T get(int index) {
+    if (index < 0 || index >= length)
+        throw std::out_of_range("Index out of bounds");
+    return data[index]; // not &data[index]
+}
+
+const T get(int index) const {
+    if (index < 0 || index >= length)
+        throw std::out_of_range("Index out of bounds");
+    return data[index];
+}
+
+
+ 
 
     
 };
