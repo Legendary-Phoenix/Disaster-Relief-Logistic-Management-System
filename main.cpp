@@ -15,7 +15,7 @@ int main()
         cout << "3. Emergency Request Coordinator" << endl;
         cout << "4. Transport Unit Scheduler" << endl;
         cout << "5. Exit" << endl;
-        cout << "Enter your choice: ";
+        cout << "\nEnter your choice: ";
         cin >> option;
 
         switch (option)
@@ -30,10 +30,11 @@ int main()
                 cout << "1. Pack Supply Box" << endl;
                 cout << "2. Send Supply Package" << endl;
                 cout << "3. View Packed Supplies" << endl;
-                cout << "4. Check if Stack is Full" << endl;
-                cout << "5. Check if Stack is Empty" << endl;
-                cout << "6. Exit to Main Menu" << endl;
-                cout << "Enter your choice: ";
+                cout << "4. View Dispatched Supplies" << endl;
+                cout << "5. Check if Stack is Full" << endl;
+                cout << "6. Check if Stack is Empty" << endl;
+                cout << "7. Exit to Main Menu" << endl;
+                cout << "\nEnter your choice: ";
                 cin >> subOption;
 
                 switch (subOption)
@@ -48,18 +49,21 @@ int main()
                     supplyStack.viewPackedSupplies();
                     break;
                 case 4:
-                    cout << (supplyStack.isFull() ? "Stack is full." : "Stack is not full.") << endl;
+                    supplyStack.viewDispatchedSupplies();
                     break;
                 case 5:
-                    cout << (supplyStack.isEmpty() ? "Stack is empty." : "Stack is not empty.") << endl;
+                    cout << (supplyStack.isFull() ? "Stack is full." : "Stack is not full.") << endl;
                     break;
                 case 6:
-                    cout << "Returning to main menu..." << endl;
+                    cout << (supplyStack.isEmpty() ? "Stack is empty." : "Stack is not empty.") << endl;
+                    break;
+                case 7:
+                    cout << "\nReturning to main menu...\n" << endl;
                     break;
                 default:
                     cout << "Invalid option. Please try again." << endl;
                 }
-            } while (subOption != 6);
+            } while (subOption != 7);
             break;
         }
         case 2:
