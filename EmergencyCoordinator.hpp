@@ -35,7 +35,7 @@ inline void emergencyMenu() {
             cout << "Enter location: ";
             getline(cin, location);
 
-            cout << "Enter type (e.g., medical, food): ";
+            cout << "Enter type (eg: Fire, medical, food): ";
             getline(cin, type);
 
             // Enforce <= 150 words
