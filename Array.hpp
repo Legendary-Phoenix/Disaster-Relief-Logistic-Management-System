@@ -53,6 +53,11 @@ public:
     T& operator[](int index) {
         return data[index];
     }
+    
+    const T& operator[](int index) const {
+    return data[index];
+}
+
 
     int size() const {
         return length;
@@ -61,4 +66,6 @@ public:
     bool isEmpty() const {
         return length == 0;
     }
+
+    
 };

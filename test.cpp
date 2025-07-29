@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <cctype>
+#include "TransportMenu.hpp"
 
 using namespace std;
 
@@ -9,18 +10,10 @@ int main()
     string name;
     string exit;
     bool loop = true;
-    while (loop)
-    {
-        cout << "What's your name? ";
-        getline(cin, name); // Read full line including spaces
+    
+    TransportMenu menu;
 
-        cout << "Hello, " << name << "! Welcome to C++ in VS Code." << endl;
-        cout << "End Program? (Y/N)";
-        getline(cin, exit);
+    menu.showMenu();
+    return 0;
 
-        if (exit == "Y" || exit == "y")
-        {
-            return 0;
-        };
-    }
 }
