@@ -1,7 +1,7 @@
 /*
 NAME : MUHAMMAD RIDWAN BIN JESMARNEL
 TP NUMBER : TP078616
-ROLE: ROLE 1
+ROLE: ROLE 1 SUPPLY BASE MANAGER
 */
 
 #pragma once
@@ -82,7 +82,7 @@ class SupplyStack {
                 getline(ss, type, ',');
                 getline(ss, quantityStr, ',');
                 getline(ss, status, ',');
-                getline(ss, timestamp, ',');
+                getline(ss, timestamp);
 
                 SupplyBox box;
                 box.id = id;
@@ -120,7 +120,7 @@ class SupplyStack {
             box.timestamp = getTime(); // Set the timestamp for the box
             ofstream fout(filename, ios::app);
             if(fout.is_open()){
-                fout << "BX0" << box.id << "," << box.type << "," << box.quantity << "," << box.status << "," << box.timestamp << "\n";
+                fout << box.id << "," << box.type << "," << box.quantity << "," << box.status << "," << box.timestamp << "\n";
                 fout.close();
             }
         }
@@ -137,13 +137,20 @@ class SupplyStack {
 
             SupplyBox newBox;
             cout << endl << "Enter Supply Box ID: ";
-            cin >> newBox.id;
+            string rawId;
+            cin >> rawId;
+            if(rawId.rfind("BX",0) != 0){
+                newBox.id = "BX" + rawId; // Ensure ID starts with "BX"
+            } else {
+                newBox.id = rawId; // Use the provided ID directly
+            }
             cin.ignore(); // Clear the newline character from the input buffer
             cout << "Enter Supply Type : ";
             getline(cin, newBox.type);
             cout << "Enter Quantity: ";
             cin >> newBox.quantity;
             newBox.status = "Packed";
+            newBox.timestamp = getTime(); // Set the timestamp for the new box
 
             stack[++top] = newBox; // Push the new box onto the stack
             exportToCSV(newBox, "packed_supplies.csv"); // Export to CSV file

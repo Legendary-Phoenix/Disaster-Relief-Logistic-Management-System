@@ -8,7 +8,7 @@ int main()
     int option;
     do
     {
-        cout << "Welcome to the Supply Base Manager!" << endl;
+        cout << "Welcome to the Disaster Relief Logistics Management System!" << endl;
         cout << "Which operation would you like to perform?" << endl;
         cout << "1. Supply Base Manager" << endl;
         cout << "2. Volunteer Operation Officer" << endl;
