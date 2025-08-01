@@ -5,6 +5,8 @@
 #include <sstream>
 #include <iomanip>
 #include "VolunteerQueueArray.h"
+#include "EmergencyCoordinator.hpp"
+#include "TransportMenu.hpp"
 
 using namespace std;
 
@@ -244,17 +246,17 @@ int main()
             break;
         }
         case 2:
-            
-
             loadVolunteersFromJSON("volunteers.csv", vqa);
-
             volunteerMenu(vqa);
+
             break;
         case 3:
-            cout << "Emergency Request Coordinator functionality not implemented yet." << endl;
+            emergencyMenu();
             break;
         case 4:
-            cout << "Transport Unit Scheduler functionality not implemented yet." << endl;
+            TransportMenu menu;
+            menu.showMenu();
+
             break;
         case 5:
             cout << "Exiting the program. Goodbye!" << endl;
