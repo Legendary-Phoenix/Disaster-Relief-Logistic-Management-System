@@ -12,6 +12,8 @@ using namespace std;
 int main()
 {
     int option;
+    VolunteerQueueArray vqa;
+    
     do
     {
         cout << "Welcome to the Disaster Relief Logistics Management System!" << endl;
@@ -73,7 +75,7 @@ int main()
             break;
         }
         case 2:
-            VolunteerQueueArray vqa;
+            
 
             loadVolunteersFromJSON("volunteers.csv", vqa);
 
