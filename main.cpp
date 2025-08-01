@@ -184,6 +184,7 @@ int main()
 {
     int option;
     VolunteerQueueArray vqa;
+    TransportMenu menu;
     
     do
     {
@@ -254,7 +255,6 @@ int main()
             emergencyMenu();
             break;
         case 4:
-            TransportMenu menu;
             menu.showMenu();
 
             break;
