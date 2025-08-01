@@ -11,9 +11,6 @@ int main()
     string exit;
     bool loop = true;
     
-    TransportMenu menu;
-
-    menu.showMenu();
-    return 0;
+    
 
 }
